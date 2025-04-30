@@ -19,7 +19,7 @@ export const Register = () => {
   } = useForm<RegisterInput>();
   const handleRegister = async (data: RegisterInput) => {
     try {
-      await axios.post("/api/auth/register", {
+      await axios.post("/auth/register", {
         email: data.email,
         username: data.username,
         password: data.password

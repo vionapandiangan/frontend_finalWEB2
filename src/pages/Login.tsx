@@ -21,7 +21,7 @@ export const Login = () => {
   const handleLogin = async (data: LoginInput) => {
     try {
       const res = await axios.post<{ access_token: string }>(
-        "/api/auth/login",
+        "/auth/login",
         {
           email: data.email,
           password: data.password
@@ -30,6 +30,20 @@ export const Login = () => {
 
       if (res.data) {
         login(res.data.access_token);
+        // Fetch user profile and store in localStorage
+        try {
+          const userRes = await axios.get('/user');
+          console.log('userRes.data', userRes.data);
+          if (userRes.data && userRes.data.role) {
+            localStorage.setItem('user', JSON.stringify(userRes.data));
+          } else {
+            alert('Login berhasil, tapi data user/role tidak ditemukan. Cek backend endpoint /user!');
+            localStorage.removeItem('user');
+          }
+        } catch (userErr) {
+          alert('Gagal mengambil profil user dari backend. Cek endpoint /user!');
+          localStorage.removeItem('user');
+        }
         navigate("/");
       } else {
         alert("Username or password is wrong");

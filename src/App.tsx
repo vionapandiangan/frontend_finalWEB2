@@ -9,11 +9,16 @@ import BaseLayout from "./layouts/BaseLayout";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Post from "./pages/Post";
 import Register from "./pages/Register";
 import PrivateRoute from "./utils/PrivateRoute";
 import PublicRoute from "./utils/PublicRoute";
 import { AuthProvider } from "./utils/AuthProvider";
+
+// Import halaman-halaman untuk sistem absensi
+import AttendanceList from "./pages/attendance/AttendanceList";
+import AttendanceInput from "./pages/attendance/AttendanceInput";
+import CourseList from "./pages/course/CourseList";
+import CourseDetail from "./pages/course/CourseDetail";
 
 const queryClient = new QueryClient();
 function App() {
@@ -48,10 +53,34 @@ function App() {
             }
           />
           <Route
-            path="posts"
+            path="courses"
             element={
               <PrivateRoute>
-                <Post />
+                <CourseList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="courses/:id"
+            element={
+              <PrivateRoute>
+                <CourseDetail />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="attendance"
+            element={
+              <PrivateRoute>
+                <AttendanceList />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="attendance/input"
+            element={
+              <PrivateRoute>
+                <AttendanceInput />
               </PrivateRoute>
             }
           />
