@@ -1,6 +1,3 @@
-
-import React from 'react';
-
 const motivasiList = [
   'Mengajar adalah pekerjaan mulia, semangat membentuk generasi penerus bangsa!',
   'Setiap ilmu yang Anda bagikan adalah investasi masa depan.',
